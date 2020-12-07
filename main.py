@@ -92,7 +92,7 @@ np.random.seed(RANDOM_SEED)
 if __name__ == '__main__':
     # timestamp = "20201205-030029"
     timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    model_name = "Resnet50-DenseBN-WD1e4-SmallLR-Epoch50-Version-14"
+    model_name = "Resnet50-DenseBN-WD1e4-SmallLR-Epoch30-Version-14"
     model_name = timestamp + '-' + model_name
     use_model = 'resnet'  # 'svm' or 'resnet' or 'fc'
     instructor = Instructor(model_name, args)
