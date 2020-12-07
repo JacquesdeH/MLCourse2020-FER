@@ -356,7 +356,7 @@ class Instructor:
         self.pretrainDataloader = DataLoader(dataset=self.pretrainDataset, batch_size=self.args.batch_size,
                                              shuffle=True, num_workers=self.args.num_workers)
         self.resnetOptimizer = torch.optim.Adam([
-            {'params': self.resnet.baseParameters(), 'lr': self.args.resnet_base_lr, 'weight_decay': self.args.weight_decay},
+            {'params': self.resnet.baseParameters(), 'lr': self.args.resnet_base_lr},
             {'params': self.resnet.finetuneParameters(), 'lr': self.args.resnet_ft_lr, 'weight_decay': self.args.weight_decay}])
         tot_steps = math.ceil(len(self.pretrainDataloader) / self.args.cumul_batch) * self.args.epochs
         self.resnetScheduler = get_linear_schedule_with_warmup(

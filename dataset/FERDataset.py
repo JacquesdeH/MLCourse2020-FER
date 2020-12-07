@@ -24,7 +24,7 @@ class FERDataset(Dataset):
         self.trans = Compose([ToTensor(),
                               # Normalize(mean=0.5, std=0.5),
                               ToPILImage(),
-                              RandomRotation(30),
+                              RandomRotation(45),
                               RandomResizedCrop([48, 48], scale=(0.75, 1.0)),
                               RandomHorizontalFlip(),
                               ToTensor()
