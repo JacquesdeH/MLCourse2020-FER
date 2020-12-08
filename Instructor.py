@@ -358,9 +358,7 @@ class Instructor:
         self.pretrainDataset = FERDataset(all_data, labels=all_labels, args=self.args)
         self.pretrainDataloader = DataLoader(dataset=self.pretrainDataset, batch_size=self.args.batch_size,
                                              shuffle=True, num_workers=self.args.num_workers)
-        self.resnetOptimizer = torch.optim.Adam([
-            {'params': self.resnet.baseParameters(), 'lr': self.args.resnet_base_lr},
-            {'params': self.resnet.finetuneParameters(), 'lr': self.args.resnet_ft_lr, 'weight_decay': self.args.weight_decay}])
+        self.resnetOptimizer = self.getResnetOptimizer()
         tot_steps = math.ceil(len(self.pretrainDataloader) / self.args.cumul_batch) * self.args.epochs
         self.resnetScheduler = get_linear_schedule_with_warmup(
             self.resnetOptimizer, num_warmup_steps=tot_steps * self.args.warmup_rate, num_training_steps=tot_steps)
@@ -374,7 +372,22 @@ class Instructor:
             print()
         self.writer.close()
 
+    def getResnetOptimizer(self):
+        if self.args.resnet_optim == 'SGD':
+            return torch.optim.SGD([
+                {'params': self.resnet.baseParameters(), 'lr': self.args.resnet_base_lr,
+                 'weight_decay': self.args.weight_decay, 'momentum': self.args.resnet_momentum},
+                {'params': self.resnet.finetuneParameters(), 'lr': self.args.resnet_ft_lr,
+                 'weight_decay': self.args.weight_decay, 'momentum': self.args.resnet_momentum}],
+                lr=self.args.resnet_base_lr)
+        elif self.args.resnet_optim == 'Adam':
+            return torch.optim.Adam([
+                {'params': self.resnet.baseParameters(), 'lr': self.args.resnet_base_lr},
+                {'params': self.resnet.finetuneParameters(), 'lr': self.args.resnet_ft_lr,
+                 'weight_decay': self.args.weight_decay}])
+
 
 if __name__ == '__main__':
     from main import args
+
     instructor = Instructor('Baseline', args)

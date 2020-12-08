@@ -7,7 +7,7 @@
 
 import torch
 import torch.nn as nn
-from torchvision.models import resnet50, resnet101, resnet34, resnet152
+from torchvision.models import resnet50, resnet101, resnet34, resnet152, resnet18
 
 class Resnet(nn.Module):
     def __init__(self, use_pretrained=False, num_classes=2, norm_layer=None, resnet_depth=50, dropout=0.5):
@@ -18,6 +18,7 @@ class Resnet(nn.Module):
             else resnet101 if resnet_depth == 101 \
             else resnet50 if resnet_depth == 50 \
             else resnet34 if resnet_depth == 34 \
+            else resnet18 if resnet_depth == 18 \
             else None
         self.base = self.resnet_fn(pretrained=use_pretrained, norm_layer=norm_layer)
         self.fc = nn.Sequential(

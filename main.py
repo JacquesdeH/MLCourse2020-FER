@@ -16,13 +16,14 @@ EMBED_DIM = 128*7*7
 USE_SPARSE = True
 RHO = 0.02
 REGULIZER_WEIGHT = 1
-EPOCHS = 50
+EPOCHS = 100
 BATCH_SIZE = 128
 PRETRAIN_LR = 3e-5
-RESNET_BASE_LR = 3e-4
-RESNET_FT_LR = 1e-3
-RESNET_WEIGHT_DECAY = 0
+RESNET_BASE_LR = 1e-3
+RESNET_FT_LR = 5e-3
+RESNET_WEIGHT_DECAY = 5e-4
 RESNET_DROPOUT = 0.5
+RESNET_MOMENTUM = 0.9
 MAX_NORM = 1.0
 NUM_WORKERS = 1
 CUMUL_BATCH = 1
@@ -35,6 +36,7 @@ WARMUP_RATE = 0.1
 UPSAMPLE_MODE = 'nearest'
 ADD_NOISE = 0.01
 RESNET_DEPTH = 50
+RESNET_OPTIM = 'SGD'  # 'Adam' or 'SGD'
 
 # paths
 DATA_PATH = os.path.join("data")
@@ -74,6 +76,8 @@ parser.add_argument('--add_noise', default=ADD_NOISE, type=float)
 parser.add_argument('--resnet_depth', default=RESNET_DEPTH, type=int)
 parser.add_argument('--weight_decay', default=RESNET_WEIGHT_DECAY, type=float)
 parser.add_argument('--resnet_dropout', default=RESNET_DROPOUT, type=float)
+parser.add_argument('--resnet_momentum', default=RESNET_MOMENTUM, type=float)
+parser.add_argument('--resnet_optim', default=RESNET_OPTIM, type=str)
 
 
 args = parser.parse_args()
@@ -94,7 +98,7 @@ np.random.seed(RANDOM_SEED)
 if __name__ == '__main__':
     # timestamp = "20201205-030029"
     timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    model_name = "Resnet50-BS128-BigLR-MoreFC-Dropout-Noised-Epoch50-Version-21"
+    model_name = "Resnet50-BS128-BigLR-MoreFC-Dropout-Noised-Epoch50-Version-22"
     model_name = timestamp + '-' + model_name
     use_model = 'resnet'  # 'svm' or 'resnet' or 'fc'
     instructor = Instructor(model_name, args)
