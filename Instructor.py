@@ -294,8 +294,10 @@ class Instructor:
         for idx, (images, labels) in enumerate(tqdm(self.pretrainDataloader)):
             batch_size = images.shape[0]
             images, labels = images.to(self.args.device), labels.to(self.args.device)
+            images += torch.randn(images.shape).to(images.device) * self.args.add_noise
+            images = images.repeat(1, 3, 1, 1)
 
-            outs = self.resnet(images.repeat(1, 3, 1, 1))
+            outs = self.resnet(images)
             preds = outs.max(-1)[1].unsqueeze(dim=1)
             cur_acc = (preds == labels).type(torch.int).sum().item()
 

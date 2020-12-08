@@ -21,9 +21,7 @@ class Resnet(nn.Module):
             else None
         self.base = self.resnet_fn(pretrained=use_pretrained, norm_layer=norm_layer)
         self.fc = nn.Sequential(
-            nn.Linear(in_features=1000, out_features=128),
-            nn.BatchNorm1d(num_features=128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True),
-            nn.Linear(in_features=128, out_features=num_classes)
+            nn.Linear(in_features=1000, out_features=num_classes)
         )
 
     def forward(self, x):
