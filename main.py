@@ -16,12 +16,13 @@ EMBED_DIM = 128*7*7
 USE_SPARSE = True
 RHO = 0.02
 REGULIZER_WEIGHT = 1
-EPOCHS = 80
-BATCH_SIZE = 32
+EPOCHS = 50
+BATCH_SIZE = 128
 PRETRAIN_LR = 3e-5
-RESNET_BASE_LR = 1e-4
-RESNET_FT_LR = 5e-4
+RESNET_BASE_LR = 3e-4
+RESNET_FT_LR = 1e-3
 RESNET_WEIGHT_DECAY = 0
+RESNET_DROPOUT = 0.5
 MAX_NORM = 1.0
 NUM_WORKERS = 1
 CUMUL_BATCH = 1
@@ -72,6 +73,7 @@ parser.add_argument('--upsample_mode', default=UPSAMPLE_MODE, type=str)
 parser.add_argument('--add_noise', default=ADD_NOISE, type=float)
 parser.add_argument('--resnet_depth', default=RESNET_DEPTH, type=int)
 parser.add_argument('--weight_decay', default=RESNET_WEIGHT_DECAY, type=float)
+parser.add_argument('--resnet_dropout', default=RESNET_DROPOUT, type=float)
 
 
 args = parser.parse_args()
@@ -92,7 +94,7 @@ np.random.seed(RANDOM_SEED)
 if __name__ == '__main__':
     # timestamp = "20201205-030029"
     timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    model_name = "Resnet50-Noised-Epoch80-Version-20"
+    model_name = "Resnet50-BS128-BigLR-MoreFC-Dropout-Noised-Epoch50-Version-21"
     model_name = timestamp + '-' + model_name
     use_model = 'resnet'  # 'svm' or 'resnet' or 'fc'
     instructor = Instructor(model_name, args)

@@ -46,7 +46,8 @@ class Instructor:
         self.svm = SVC(C=self.args.svm_c, kernel=self.args.svm_ker, verbose=True, max_iter=self.args.svm_max_iter)
         self.resnet = Resnet(use_pretrained=True,
                              num_classes=self.args.classes,
-                             resnet_depth=self.args.resnet_depth).to(self.args.device)
+                             resnet_depth=self.args.resnet_depth,
+                             dropout=self.args.resnet_dropout).to(self.args.device)
         self.resnetOptimizer = None
         self.resnetScheduler = None
         self.resnetLossFn = None
