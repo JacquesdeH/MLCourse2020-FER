@@ -17,10 +17,10 @@ USE_SPARSE = True
 RHO = 0.02
 REGULIZER_WEIGHT = 1
 EPOCHS = 50
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 PRETRAIN_LR = 3e-5
-RESNET_BASE_LR = 1e-5
-RESNET_FT_LR = 2e-4
+RESNET_BASE_LR = 1e-4
+RESNET_FT_LR = 5e-4
 RESNET_WEIGHT_DECAY = 0
 MAX_NORM = 1.0
 NUM_WORKERS = 1
@@ -92,7 +92,7 @@ np.random.seed(RANDOM_SEED)
 if __name__ == '__main__':
     # timestamp = "20201205-030029"
     timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    model_name = "Resnet50-Noised-Epoch50-Version-18"
+    model_name = "Resnet50-Noised-Epoch50-Version-19"
     model_name = timestamp + '-' + model_name
     use_model = 'resnet'  # 'svm' or 'resnet' or 'fc'
     instructor = Instructor(model_name, args)
