@@ -16,12 +16,12 @@ EMBED_DIM = 128*7*7
 USE_SPARSE = True
 RHO = 0.02
 REGULIZER_WEIGHT = 1
-EPOCHS = 150
-BATCH_SIZE = 128
+EPOCHS = 60
+BATCH_SIZE = 32
 PRETRAIN_LR = 3e-5
-RESNET_BASE_LR = 3e-3
-RESNET_FT_LR = 1e-2
-RESNET_WEIGHT_DECAY = 1e-5
+RESNET_BASE_LR = 3e-4
+RESNET_FT_LR = 1e-3
+RESNET_WEIGHT_DECAY = 0
 RESNET_DROPOUT = 0.5
 RESNET_MOMENTUM = 0.9
 MAX_NORM = 1.0
@@ -36,7 +36,7 @@ WARMUP_RATE = 0.1
 UPSAMPLE_MODE = 'nearest'
 ADD_NOISE = 0.01
 RESNET_DEPTH = 50
-RESNET_OPTIM = 'SGD'  # 'Adam' or 'SGD'
+RESNET_OPTIM = 'Adam'  # 'Adam' or 'SGD'
 
 # paths
 DATA_PATH = os.path.join("data")
@@ -98,7 +98,7 @@ np.random.seed(RANDOM_SEED)
 if __name__ == '__main__':
     # timestamp = "20201205-030029"
     timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    model_name = "Resnet50-BS128-WD-BigLR-MoreFC-Dropout-Noised-Epoch50-Version-23"
+    model_name = "Resnet50-BS32-BigLR-MoreFC-Dropout-Noised-Epoch50-Version-24"
     model_name = timestamp + '-' + model_name
     use_model = 'resnet'  # 'svm' or 'resnet' or 'fc'
     instructor = Instructor(model_name, args)
