@@ -362,7 +362,16 @@ class Instructor:
         tot_steps = math.ceil(len(self.pretrainDataloader) / self.args.cumul_batch) * self.args.epochs
         self.resnetScheduler = get_linear_schedule_with_warmup(
             self.resnetOptimizer, num_warmup_steps=tot_steps * self.args.warmup_rate, num_training_steps=tot_steps)
-        self.resnetLossFn = torch.nn.CrossEntropyLoss()
+        self.resnetLossFn = torch.nn.CrossEntropyLoss(
+            weight=torch.tensor([
+                9.40661861,
+                1.00104606,
+                0.56843877,
+                0.84912748,
+                1.02660468,
+                1.29337298,
+                0.82603942,
+            ], dtype=torch.float, device=self.args.device))
         epochs = self.args.epochs
         for epoch in range(1, epochs + 1):
             print()
