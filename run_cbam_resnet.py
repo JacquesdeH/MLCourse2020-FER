@@ -31,6 +31,7 @@ def run_cbam_resnet(config_path):
     train_set, val_set, test_set = get_dataset(configs)
     trainer = FER2013Trainer(model, train_set, val_set, test_set, configs)
     trainer.train()
+    return trainer.queryCheckpointPath()
 
 
 def get_dataset(configs):
@@ -97,5 +98,6 @@ def genTestResult(config_path, ckpt_path, args):
 
 
 if __name__ == "__main__":
-    main("./configs/fer2013_config.json")
-    genTestResult("./configs/fer2013_config.json", "saved/checkpoints/cbam_resnet50__n_2020Dec14_15.13")
+    from main import args
+    run_cbam_resnet("config.json")
+    genTestResult("config.json", "saved/checkpoints/cbam_resnet50__n_2020Dec14_15.13", args=args)

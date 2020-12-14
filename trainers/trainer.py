@@ -150,6 +150,9 @@ class FER2013Trainer:
             ),
         )
 
+    def queryCheckpointPath(self):
+        return self._checkpoint_path
+
     def _train(self):
         self._model.train()
         train_loss = 0.0

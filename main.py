@@ -51,7 +51,7 @@ LOG_PATH = os.path.join("log")
 TRAIN_PATH = os.path.join(RAW_PATH, "train")
 TEST_PATH = os.path.join(RAW_PATH, "test")
 SAMPLE_PATH = os.path.join(DATA_PATH, 'sample')
-CBAM_CONFIG_PATH = os.path.join("configs", "fer2013_config.json")
+CBAM_CONFIG_PATH = os.path.join("config.json")
 
 parser = argparse.ArgumentParser()
 
@@ -113,6 +113,7 @@ if __name__ == '__main__':
     model_name = "Resnet50-BS32-BigLR-MoreFC-Dropout-Noised-WeightedLoss-Epoch50-Version-27"
     model_name = timestamp + '-' + model_name
     use_model = 'cbam_resnet'  # 'svm' or 'resnet' or 'cbam_resnet'
+
     instructor = Instructor(model_name, args)
     if use_model == 'svm':
         instructor.trainAutoEncoder()
@@ -120,8 +121,8 @@ if __name__ == '__main__':
         instructor.trainSVM(load=False)
         instructor.genTestResult(from_svm=True)
     elif use_model == 'cbam_resnet':
-        run_cbam_resnet(args.CBAM_CONFIG_PATH)
-        # genTestResult(args.CBAM_CONFIG_PATH, "saved/checkpoints/cbam_resnet50__n_2020Dec14_15.13", args=args)
+        cbam_resnet_ckpt_path = run_cbam_resnet(args.CBAM_CONFIG_PATH)
+        genTestResult(args.CBAM_CONFIG_PATH, cbam_resnet_ckpt_path, args=args)
     elif use_model == 'resnet':
         instructor.trainResnet()
         instructor.loadResnet(epoch=args.epochs)
