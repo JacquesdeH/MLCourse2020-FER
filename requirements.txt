@@ -1,0 +1,16 @@
+torch~=1.5.1
+torchvision~=0.6.1
+tqdm~=4.46.0
+opencv-python~=4.2.0.34
+numpy~=1.18.3
+pandas~=1.0.3
+imgaug~=0.4.0
+scikit-image~=0.17.2
+pytorchcv~=0.0.60
+requests~=2.23.0
+matplotlib~=3.2.1
+joblib~=0.15.1
+tensorboardX~=2.1
+transformers~=3.5.1
+sklearn~=0.0
+scikit-learn~=0.23.1

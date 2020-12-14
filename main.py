@@ -2,17 +2,22 @@ import argparse
 import os
 import random
 import numpy as np
+import warnings
+import imgaug
 import datetime
 import torch
 
 from Instructor import Instructor
+from run_cbam_resnet import run_cbam_resnet, genTestResult
+
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 RANDOM_SEED = 7
 
 # instructor
 CLASSES = 7
 PIC_LEN = 48
-EMBED_DIM = 128*7*7
+EMBED_DIM = 128 * 7 * 7
 USE_SPARSE = True
 RHO = 0.02
 REGULIZER_WEIGHT = 1
@@ -46,6 +51,7 @@ LOG_PATH = os.path.join("log")
 TRAIN_PATH = os.path.join(RAW_PATH, "train")
 TEST_PATH = os.path.join(RAW_PATH, "test")
 SAMPLE_PATH = os.path.join(DATA_PATH, 'sample')
+CBAM_CONFIG_PATH = os.path.join("configs", "fer2013_config.json")
 
 parser = argparse.ArgumentParser()
 
@@ -79,7 +85,6 @@ parser.add_argument('--resnet_dropout', default=RESNET_DROPOUT, type=float)
 parser.add_argument('--resnet_momentum', default=RESNET_MOMENTUM, type=float)
 parser.add_argument('--resnet_optim', default=RESNET_OPTIM, type=str)
 
-
 args = parser.parse_args()
 
 args.DATA_PATH = DATA_PATH
@@ -89,26 +94,34 @@ args.LOG_PATH = LOG_PATH
 args.TRAIN_PATH = TRAIN_PATH
 args.TEST_PATH = TEST_PATH
 args.SAMPLE_PATH = SAMPLE_PATH
+args.CBAM_CONFIG_PATH = CBAM_CONFIG_PATH
 
 args.device = torch.device('cuda' if args.cuda and torch.cuda.is_available() else 'cpu')
 
 random.seed(RANDOM_SEED)
 np.random.seed(RANDOM_SEED)
+imgaug.seed(RANDOM_SEED)
+torch.manual_seed(RANDOM_SEED)
+torch.cuda.manual_seed_all(RANDOM_SEED)
+np.random.seed(RANDOM_SEED)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 if __name__ == '__main__':
     # timestamp = "20201205-030029"
     timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     model_name = "Resnet50-BS32-BigLR-MoreFC-Dropout-Noised-WeightedLoss-Epoch50-Version-27"
     model_name = timestamp + '-' + model_name
-    use_model = 'resnet'  # 'svm' or 'resnet' or 'fc'
+    use_model = 'cbam_resnet'  # 'svm' or 'resnet' or 'cbam_resnet'
     instructor = Instructor(model_name, args)
     if use_model == 'svm':
-        # instructor.trainAutoEncoder()
-        # instructor.generateAutoEncoderTestResultSamples(sample_cnt=20)
+        instructor.trainAutoEncoder()
+        instructor.generateAutoEncoderTestResultSamples(sample_cnt=20)
         instructor.trainSVM(load=False)
         instructor.genTestResult(from_svm=True)
-    elif use_model == 'fc':
-        pass
+    elif use_model == 'cbam_resnet':
+        run_cbam_resnet(args.CBAM_CONFIG_PATH)
+        # genTestResult(args.CBAM_CONFIG_PATH, "saved/checkpoints/cbam_resnet50__n_2020Dec14_15.13", args=args)
     elif use_model == 'resnet':
         instructor.trainResnet()
         instructor.loadResnet(epoch=args.epochs)
