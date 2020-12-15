@@ -11,6 +11,7 @@ import torch
 from torch.utils.data.dataset import Dataset
 from torchvision.transforms import Compose, ToTensor, RandomResizedCrop, Normalize, RandomHorizontalFlip, \
     RandomRotation, ToPILImage
+import cv2
 
 
 class FERDataset(Dataset):
@@ -37,7 +38,9 @@ class FERDataset(Dataset):
 
     def __getitem__(self, index):
         image = self.images[index]
-        image = self.trans(np.array(image, dtype=np.uint8))
+        image = np.array(image, dtype=np.uint8)
+        image = cv2.resize(image, (224, 224))
+        image = self.trans(image)
         if self.labels is not None:
             label = self.labels[index]
             label = torch.tensor([label], dtype=torch.long)

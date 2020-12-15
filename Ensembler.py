@@ -24,6 +24,7 @@ DST_SUBMISSION = os.path.join(ENSEMBLE_PATH, "submission.csv")
 #     "20201210-164100-Cbam-Resnet50-Version-33--71307": 71.307,
 #     "20201210-164100-Cbam-Resnet50-Version-34--73307": 73.307,
 #     "20201210-164100-Cbam-Resnet50-Version-35--72276": 72.226,
+#     "20201210-164100-Cbam-Resnet50-Version-36--72471": 72.471,
 # }
 
 submissions = {
@@ -37,6 +38,7 @@ submissions = {
     # "20201210-164100-Cbam-Resnet50-Version-33--71307": 71.307,
     "20201210-164100-Cbam-Resnet50-Version-34--73307": 73.307,
     "20201210-164100-Cbam-Resnet50-Version-35--72276": 72.226,
+    "20201210-164100-Cbam-Resnet50-Version-36--72471": 72.471,
 }
 
 emotions = [emotion.name for emotion in LabelEnum]

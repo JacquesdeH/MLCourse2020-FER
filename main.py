@@ -122,6 +122,7 @@ if __name__ == '__main__':
         instructor.genTestResult(from_svm=True)
     elif use_model == 'cbam_resnet':
         cbam_resnet_ckpt_path = run_cbam_resnet(args.CBAM_CONFIG_PATH)
+        # cbam_resnet_ckpt_path = "saved/checkpoints/cbam_resnet50__n_2020Dec15_01.31"
         genTestResult(args.CBAM_CONFIG_PATH, cbam_resnet_ckpt_path, args=args)
     elif use_model == 'resnet':
         instructor.trainResnet()

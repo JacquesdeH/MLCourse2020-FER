@@ -20,6 +20,7 @@ from torch.utils.data import DataLoader
 from trainers.trainer import FER2013Trainer
 from dataset.fer2013dataset import fer2013
 from model.cbam_resnet import cbam_resnet50
+from dataset.FERDataset import FERDataset
 
 
 def run_cbam_resnet(config_path):
@@ -41,7 +42,7 @@ def get_dataset(configs):
     return train_set, val_set, test_set
 
 
-def _load_test_data():
+def _load_test_data(args):
     file_map = pd.read_csv(os.path.join(args.RAW_PATH, 'submission.csv'))
     test_data = []
     img_names = []
@@ -76,9 +77,8 @@ def genTestResult(config_path, ckpt_path, args):
     print()
     print('-------------------------------------------------------')
     print('  -> Generating test result for {:} ...'.format('cbam_resnet50'))
-    test_data, img_names = _load_test_data()
+    test_data, img_names = _load_test_data(args)
     test_length = len(test_data)
-    from FERDataset import FERDataset
     testDataset = FERDataset(test_data, filenames=img_names, use_da=False, args=args)
     testDataloader = DataLoader(dataset=testDataset,
                                 batch_size=16,
