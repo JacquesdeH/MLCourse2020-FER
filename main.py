@@ -12,7 +12,7 @@ from run_cbam_resnet import run_cbam_resnet, genTestResult
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
-RANDOM_SEED = 170511
+RANDOM_SEED = 2017
 
 # instructor
 CLASSES = 7
