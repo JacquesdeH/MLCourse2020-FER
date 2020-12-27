@@ -29,21 +29,22 @@ DST_SUBMISSION = os.path.join(ENSEMBLE_PATH, "submission.csv")
 
 submissions = {
     "20201210-164100-Cbam-Resnet50-Version-26--73112": 73.112,
-    "20201210-164100-Cbam-Resnet50-Version-27--72221": 72.221,
+    # "20201210-164100-Cbam-Resnet50-Version-27--72221": 72.221,
     # "20201210-164100-Cbam-Resnet50-Version-28--71691": 71.691,
-    "20201210-164100-Cbam-Resnet50-Version-29--72137": 72.137,
+    # "20201210-164100-Cbam-Resnet50-Version-29--72137": 72.137,
     # "20201210-164100-Cbam-Resnet50-Version-30--71134": 71.134,
     "20201210-164100-Cbam-Resnet50-Version-31--72889": 72.889,
     # "20201210-164100-Cbam-Resnet50-Version-32--71663": 71.663,
     # "20201210-164100-Cbam-Resnet50-Version-33--71307": 71.307,
     "20201210-164100-Cbam-Resnet50-Version-34--73307": 73.307,
-    "20201210-164100-Cbam-Resnet50-Version-35--72276": 72.226,
-    "20201210-164100-Cbam-Resnet50-Version-36--72471": 72.471,
+    # "20201210-164100-Cbam-Resnet50-Version-35--72276": 72.226,
+    # "20201210-164100-Cbam-Resnet50-Version-36--72471": 72.471,
     "20201210-164100-Cbam-Resnet50-Version-37--72862": 72.862,
-    "20201210-164100-Cbam-Resnet50-Version-38--72053": 72.053,
+    # "20201210-164100-Cbam-Resnet50-Version-38--72053": 72.053,
     "20201210-164100-Cbam-Resnet50-Version-39--72694": 72.694,
     "20201210-164100-Cbam-Resnet50-Version-40--72722": 72.722,
     "20201210-164100-Cbam-Resnet50-Version-41--72527": 72.527,
+    # "20201210-164100-Cbam-Resnet50-Version-42--72276": 72.276,
 }
 
 emotions = [emotion.name for emotion in LabelEnum]
