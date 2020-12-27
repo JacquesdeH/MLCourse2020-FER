@@ -43,6 +43,7 @@ submissions = {
     "20201210-164100-Cbam-Resnet50-Version-38--72053": 72.053,
     "20201210-164100-Cbam-Resnet50-Version-39--72694": 72.694,
     "20201210-164100-Cbam-Resnet50-Version-40--72722": 72.722,
+    "20201210-164100-Cbam-Resnet50-Version-41--72527": 72.527,
 }
 
 emotions = [emotion.name for emotion in LabelEnum]
