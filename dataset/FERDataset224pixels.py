@@ -2,7 +2,7 @@
 # Author      : JacquesdeH
 # Create Time : 2020/12/05 0:32
 # Project Name: MLCourse-FER
-# File        : fer2013dataset.py
+# File        : FERDataset224pixels.py
 # --------------------------------------------------
 
 import os

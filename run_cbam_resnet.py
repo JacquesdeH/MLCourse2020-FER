@@ -18,7 +18,7 @@ from matplotlib.pyplot import imread
 from torch.utils.data import DataLoader
 
 from trainers.trainer import FER2013Trainer
-from dataset.fer2013dataset import fer2013
+from dataset.FERDataset224pixels import fer2013
 from model.cbam_resnet import cbam_resnet50
 from dataset.FERDataset import FERDataset
 
