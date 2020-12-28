@@ -9,6 +9,7 @@ import os
 import pandas as pd
 from dataset.LabelEnum import LabelEnum
 
+
 RAW_SUBMISSION_PATH = os.path.join(os.path.join("data", "raw"), "submission.csv")
 ENSEMBLE_PATH = os.path.join("data", "ensemble")
 DST_SUBMISSION = os.path.join(ENSEMBLE_PATH, "submission.csv")
