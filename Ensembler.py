@@ -13,20 +13,6 @@ RAW_SUBMISSION_PATH = os.path.join(os.path.join("data", "raw"), "submission.csv"
 ENSEMBLE_PATH = os.path.join("data", "ensemble")
 DST_SUBMISSION = os.path.join(ENSEMBLE_PATH, "submission.csv")
 
-# submissions = {
-#     "20201210-164100-Cbam-Resnet50-Version-26--73112": 73.112,
-#     "20201210-164100-Cbam-Resnet50-Version-27--72221": 72.221,
-#     "20201210-164100-Cbam-Resnet50-Version-28--71691": 71.691,
-#     "20201210-164100-Cbam-Resnet50-Version-29--72137": 72.137,
-#     "20201210-164100-Cbam-Resnet50-Version-30--71134": 71.134,
-#     "20201210-164100-Cbam-Resnet50-Version-31--72889": 72.889,
-#     "20201210-164100-Cbam-Resnet50-Version-32--71663": 71.663,
-#     "20201210-164100-Cbam-Resnet50-Version-33--71307": 71.307,
-#     "20201210-164100-Cbam-Resnet50-Version-34--73307": 73.307,
-#     "20201210-164100-Cbam-Resnet50-Version-35--72276": 72.226,
-#     "20201210-164100-Cbam-Resnet50-Version-36--72471": 72.471,
-# }
-
 submissions = {
     "20201210-164100-Cbam-Resnet50-Version-26--73112": 73.112,
     # "20201210-164100-Cbam-Resnet50-Version-27--72221": 72.221,
@@ -45,6 +31,8 @@ submissions = {
     "20201210-164100-Cbam-Resnet50-Version-40--72722": 72.722,
     "20201210-164100-Cbam-Resnet50-Version-41--72527": 72.527,
     # "20201210-164100-Cbam-Resnet50-Version-42--72276": 72.276,
+    "20201210-164100-Cbam-Resnet50-Version-43--73753": 73.753,
+    # "20201210-164100-Cbam-Resnet50-Version-44--72276": 72.276,
 }
 
 emotions = [emotion.name for emotion in LabelEnum]

@@ -12,7 +12,7 @@ from run_cbam_resnet import run_cbam_resnet, genTestResult
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
-RANDOM_SEED = 2047
+RANDOM_SEED = 1228
 
 # instructor
 CLASSES = 7
@@ -96,7 +96,7 @@ args.TEST_PATH = TEST_PATH
 args.SAMPLE_PATH = SAMPLE_PATH
 args.CBAM_CONFIG_PATH = CBAM_CONFIG_PATH
 
-args.device = torch.device('cuda:2' if args.cuda and torch.cuda.is_available() else 'cpu')
+args.device = torch.device('cuda:0' if args.cuda and torch.cuda.is_available() else 'cpu')
 torch.cuda.set_device(args.device)
 
 random.seed(RANDOM_SEED)
