@@ -7,9 +7,6 @@ import imgaug
 import datetime
 import torch
 
-from Instructor import Instructor
-from run_cbam_resnet import run_cbam_resnet, genTestResult
-
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 RANDOM_SEED = 1228
@@ -97,7 +94,8 @@ args.SAMPLE_PATH = SAMPLE_PATH
 args.CBAM_CONFIG_PATH = CBAM_CONFIG_PATH
 
 args.device = torch.device('cuda:0' if args.cuda and torch.cuda.is_available() else 'cpu')
-torch.cuda.set_device(args.device)
+if args.device.type == 'cuda':
+    torch.cuda.set_device(args.device)
 
 random.seed(RANDOM_SEED)
 np.random.seed(RANDOM_SEED)
@@ -116,6 +114,7 @@ if __name__ == '__main__':
     model_name = timestamp + '-' + model_name
     use_model = 'cbam_resnet'  # 'svm' or 'resnet' or 'cbam_resnet'
 
+    from Instructor import Instructor
     instructor = Instructor(model_name, args)
     if use_model == 'svm':
         instructor.trainAutoEncoder()
@@ -123,6 +122,7 @@ if __name__ == '__main__':
         instructor.trainSVM(load=False)
         instructor.genTestResult(from_svm=True)
     elif use_model == 'cbam_resnet':
+        from run_cbam_resnet import run_cbam_resnet, genTestResult
         cbam_resnet_ckpt_path = run_cbam_resnet(args.CBAM_CONFIG_PATH)
         # cbam_resnet_ckpt_path = "saved/checkpoints/cbam_resnet50__n_2020Dec15_01.31"
         genTestResult(args.CBAM_CONFIG_PATH, cbam_resnet_ckpt_path, args=args)
